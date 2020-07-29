@@ -1,4 +1,4 @@
-package data_model.queue;
+package data_model_back.queue;
 
 public class ArrayQueueDemo {
     public static void main(String[] args) {

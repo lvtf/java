@@ -1,4 +1,4 @@
-package data_model.array;
+package data_model_back.array;
 
 public class MyArray {
     int size;

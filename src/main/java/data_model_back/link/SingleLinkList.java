@@ -1,4 +1,4 @@
-package data_model.link;
+package data_model_back.link;
 
 public class SingleLinkList {
     static class Node {

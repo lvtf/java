@@ -1,4 +1,4 @@
-package data_model.tree;
+package data_model_back.tree;
 
 public class TreeNode {
     TreeNode leftNode;

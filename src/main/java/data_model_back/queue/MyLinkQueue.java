@@ -1,4 +1,4 @@
-package data_model.queue;
+package data_model_back.queue;
 
 import java.util.concurrent.LinkedBlockingQueue;
 

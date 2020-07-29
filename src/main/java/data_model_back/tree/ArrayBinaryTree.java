@@ -1,4 +1,4 @@
-package data_model.tree;
+package data_model_back.tree;
 
 /**
  * 数组话二叉树
