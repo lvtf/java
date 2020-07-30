@@ -1,4 +1,4 @@
-package data_model_back.queue;
+package data_structure_back.queue;
 
 public class ArrayQueueDemo {
     public static void main(String[] args) {

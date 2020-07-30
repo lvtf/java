@@ -1,53 +1,51 @@
-package data_model_back.tree;
-
+package data_structure_back.tree;
 
 /**
- * 链表二叉树
+ * 线索二叉树
  */
-public class BinaryTree {
+public class ThreadBinaryTree {
     TreeNode root;
 
     //当前节点的前驱节点
     TreeNode prev;
-
+    public void setRoot(TreeNode root) {
+        this.root = root;
+    }
 
     public void treeNdodes() {
         treeNodes(root);
     }
 
-    public void treeNodesIterator(TreeNode node) {
-        while (node != null) {
-            while (node.leftType == 0) {
-                node = node.leftNode;
-            }
-            System.out.println(node.data);
-            while (node.rightType == 1) {
-                node = node.rightNode;
-                System.out.println(node.data);
-            }
-            node = node.rightNode;
-        }
-    }
 
 
     //前序遍历
     public void treeNodesFrontIterator(TreeNode node) {
-        while (node != null) {
-            System.out.println(node.data);
-            node = node.leftNode;
-            while (node.leftType == 1) {
-                System.out.println(node.data);
-                node = node.rightNode;
+        while (node!=null){
+            //打印当前结点
+            System.out.println(node);
+
+            while (node.leftType==0){
+                node=node.leftNode;
+                System.out.println(node);
             }
+
+            if (node.rightType==1){
+                node=node.rightNode;
+            }else if (node.rightNode==null){
+                //线索化前序遍历的最后一个结点的right一定为null,所以遍历完毕 退出循环
+                break;
+            }
+
 
         }
     }
-    //前序方式线索二叉树
+    /**
+     *前序方式线索二叉树
+     */
     public void treeNodesFront(TreeNode node) {
         if (node == null) {
             return;
         }
-
         if (node.leftNode == null) {
             node.leftNode = prev;
             node.leftType = 1;
@@ -59,17 +57,24 @@ public class BinaryTree {
         }
 
         prev = node;
-        if(node.leftType==1){
+        if(node.leftType==0){
             treeNodesFront(node.leftNode);
         }
-        if(node.rightType==1) {
             treeNodesFront(node.rightNode);
-        }
 
 
     }
 
-    //以中序的方式处理所有的节点
+    private void treeNodes(){
+        treeNodes(root);
+    }
+    /**
+     * 中序线索化二叉树
+     *
+     * 每一个节点的前一个节点称为前驱节点
+     * 每一个节点的后一个节点称为后继节点
+     */
+
     private void treeNodes(TreeNode node) {
         //如果当前节点为null，直接返回，最最下角的叶子节点进来了，他的leftnode为null，下次循环再进来的时候直接return
         if (node == null) {
@@ -94,8 +99,25 @@ public class BinaryTree {
         //每处理一个节点，当前节点是下个节点的前驱节点
         prev = node;
         treeNodes(node.rightNode);
-
     }
+    /**
+     * 中序遍历线索化二叉树
+     * @param node
+     */
+    public void treeNodesIterator(TreeNode node) {
+        while (node != null) {
+            while (node.leftType == 0) {
+                node = node.leftNode;
+            }
+            System.out.println(node.data);
+            while (node.rightType == 1) {
+                node = node.rightNode;
+                System.out.println(node.data);
+            }
+            node = node.rightNode;
+        }
+    }
+
 
     public void delete(int i) {
         if (root.data == i) {
@@ -128,11 +150,6 @@ public class BinaryTree {
         }
     }
 
-
-
-    public void setRoot(TreeNode root) {
-        this.root = root;
-    }
 
 
 

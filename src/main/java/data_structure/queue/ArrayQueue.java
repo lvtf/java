@@ -1,4 +1,4 @@
-package data_model.queue;
+package data_structure.queue;
 
 
 public class ArrayQueue {

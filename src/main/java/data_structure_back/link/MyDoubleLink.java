@@ -1,4 +1,4 @@
-package data_model_back.link;
+package data_structure_back.link;
 
 import java.util.LinkedList;
 

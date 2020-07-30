@@ -1,4 +1,4 @@
-package data_model_back.tree;
+package data_structure_back.tree;
 
 public class TreeTest {
     public static void main(String[] args) {
