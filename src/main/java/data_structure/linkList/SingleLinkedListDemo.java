@@ -1,9 +1,10 @@
 package data_structure.linkList;
 
 
+import java.util.Stack;
+
 public class SingleLinkedListDemo {
     public static void main(String[] args) {
-
         HeroNode hero1 = new HeroNode(1, "宋江", "及时雨");
         HeroNode hero2 = new HeroNode(2, "卢俊义", "玉麒麟");
         HeroNode hero3 = new HeroNode(3, "吴用", "智多星");
@@ -33,35 +34,77 @@ public class SingleLinkedListDemo {
         System.out.println(getLength(singleLinkedList.getHead()));
 
         System.out.println(findLastIndexHeroNode(singleLinkedList.getHead(), 1));
+        System.out.println("=========");
+        System.out.println("原列表");
+        singleLinkedList.list();
+//        reverseList(singleLinkedList.getHead());
+//        System.out.println("反转后的列表");
+//        singleLinkedList.list();
+        System.out.println("=======");
+        System.out.println("倒叙打印");
+        reversePrint(singleLinkedList.getHead());
+
+    }
+    //反转打印
+    public static void  reversePrint(HeroNode head){
+        Stack<HeroNode> heroNodes = new Stack<>();
+        HeroNode curr = head.next;
+        while (curr !=null){
+            heroNodes.push(curr);
+            curr =curr.next;
+        }
+        while (!heroNodes.isEmpty()){
+            System.out.println(heroNodes.pop());
+        }
+
+    }
+    //单链表的反转
+    public static void reverseList(HeroNode head) {
+        if (head.next == null || head.next.next == null) {
+            return;
+        }
+        HeroNode curr = head.next;
+        HeroNode next = null;
+        HeroNode resverseHead = new HeroNode(0, "", "");
+        while (curr != null) {
+            next = curr.next;//先暂时保存当前节点的下一个节点，因为后面需要使用
+            curr.next = resverseHead.next; //将 cur 的下一个节点指向新的链表的最前端
+            resverseHead.next = curr; //将 cur 连接到新的链表上
+            curr = next;
+        }
+        head.next = resverseHead.next;//将 head.next 指向 reverseHead.next , 实现单链表的反转
     }
 
-    public static HeroNode findLastIndexHeroNode(HeroNode head,int index){
-        if(head.next==null){
+    //找到倒数第k个节点
+    public static HeroNode findLastIndexHeroNode(HeroNode head, int index) {
+        if (head.next == null) {
             System.out.printf("empty");
         }
         int size = getLength(head);
-        HeroNode currNode =head.next;
-        if(index<0 || index>size){
+        HeroNode currNode = head.next;
+        if (index < 0 || index > size) {
             System.out.printf("超出范围");
         }
         for (int i = 0; i < size - index; i++) {
-            currNode=currNode.next;
+            currNode = currNode.next;
         }
         return currNode;
     }
-    public static  int getLength(HeroNode head){
-        if(head.next==null){
+
+    //得到链表的有效长度
+    public static int getLength(HeroNode head) {
+        if (head.next == null) {
             System.out.printf("empty");
-            return 0;
         }
-        HeroNode currNode =head.next;
-        int len =0;
-        while (currNode!=null){
-            currNode=currNode.next;
+        HeroNode currNode = head.next;
+        int len = 0;
+        while (currNode != null) {
+            currNode = currNode.next;
             len++;
         }
         return len;
     }
+
     static class SingleLinkedList {
         private HeroNode head = new HeroNode(0, "", "");
 
@@ -70,44 +113,45 @@ public class SingleLinkedListDemo {
         }
 
 
-
-        public void remove(int no){
+        public void remove(int no) {
             HeroNode temp = head;
-            Boolean flag=false;
-            while (true){
-                if(temp.next==null){
+            Boolean flag = false;
+            while (true) {
+                if (temp.next == null) {
                     break;
-                }else if(temp.next.no==no){
-                    flag=true;
+                } else if (temp.next.no == no) {
+                    flag = true;
                     break;
                 }
-                temp =temp.next;
+                temp = temp.next;
             }
-            if(flag){
-                temp.next=temp.next.next;
-            }else {
-                System.out.printf("没有找到%d\n",no);
+            if (flag) {
+                temp.next = temp.next.next;
+            } else {
+                System.out.printf("没有找到%d\n", no);
             }
         }
-        public void update(HeroNode newHerNode){
+
+        public void update(HeroNode newHerNode) {
             HeroNode temp = head.next;
-            Boolean flag=false;
-            while (true){
-                if(temp==null){
+            Boolean flag = false;
+            while (true) {
+                if (temp == null) {
                     break;
-                }else if(temp.no==newHerNode.no){
-                    flag=true;
+                } else if (temp.no == newHerNode.no) {
+                    flag = true;
                     break;
                 }
-                temp=temp.next;
+                temp = temp.next;
             }
-            if(flag){
-                temp.name=newHerNode.name;
-                temp.nickName=newHerNode.nickName;
-            }else {
-                System.out.printf("没有找到编号为%d\n",newHerNode.no);
+            if (flag) {
+                temp.name = newHerNode.name;
+                temp.nickName = newHerNode.nickName;
+            } else {
+                System.out.printf("没有找到编号为%d\n", newHerNode.no);
             }
         }
+
         public void add(HeroNode herNode) {
             HeroNode temp = head;
             while (true) {
@@ -155,9 +199,7 @@ public class SingleLinkedListDemo {
         }
 
 
-
     }
-
 
 
     static class HeroNode {
