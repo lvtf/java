@@ -21,6 +21,7 @@ public class SingleLinkedListDemo {
         singleLinkedList.addByOrder(hero3);
         singleLinkedList.addByOrder(hero3);
         singleLinkedList.list();
+        System.out.println("order");
         HeroNode newHerNode = new HeroNode(4, "林冲chong", "豹子小头");
         HeroNode newHerNode2 = new HeroNode(5, "林冲chong", "豹子小头");
         System.out.println("=======");
@@ -45,19 +46,21 @@ public class SingleLinkedListDemo {
         reversePrint(singleLinkedList.getHead());
 
     }
+
     //反转打印
-    public static void  reversePrint(HeroNode head){
+    public static void reversePrint(HeroNode head) {
         Stack<HeroNode> heroNodes = new Stack<>();
         HeroNode curr = head.next;
-        while (curr !=null){
+        while (curr != null) {
             heroNodes.push(curr);
-            curr =curr.next;
+            curr = curr.next;
         }
-        while (!heroNodes.isEmpty()){
+        while (!heroNodes.isEmpty()) {
             System.out.println(heroNodes.pop());
         }
 
     }
+
     //单链表的反转
     public static void reverseList(HeroNode head) {
         if (head.next == null || head.next.next == null) {
@@ -104,127 +107,128 @@ public class SingleLinkedListDemo {
         }
         return len;
     }
+}
 
-    static class SingleLinkedList {
-        private HeroNode head = new HeroNode(0, "", "");
+class SingleLinkedList {
+    private HeroNode head = new HeroNode(0, "", "");
 
-        public HeroNode getHead() {
-            return head;
-        }
-
-
-        public void remove(int no) {
-            HeroNode temp = head;
-            Boolean flag = false;
-            while (true) {
-                if (temp.next == null) {
-                    break;
-                } else if (temp.next.no == no) {
-                    flag = true;
-                    break;
-                }
-                temp = temp.next;
-            }
-            if (flag) {
-                temp.next = temp.next.next;
-            } else {
-                System.out.printf("没有找到%d\n", no);
-            }
-        }
-
-        public void update(HeroNode newHerNode) {
-            HeroNode temp = head.next;
-            Boolean flag = false;
-            while (true) {
-                if (temp == null) {
-                    break;
-                } else if (temp.no == newHerNode.no) {
-                    flag = true;
-                    break;
-                }
-                temp = temp.next;
-            }
-            if (flag) {
-                temp.name = newHerNode.name;
-                temp.nickName = newHerNode.nickName;
-            } else {
-                System.out.printf("没有找到编号为%d\n", newHerNode.no);
-            }
-        }
-
-        public void add(HeroNode herNode) {
-            HeroNode temp = head;
-            while (true) {
-                if (temp.next == null) {
-                    break;
-                }
-                temp = temp.next;
-            }
-            temp.next = herNode;
-        }
-
-        public void addByOrder(HeroNode heroNode) {
-            HeroNode temp = head;
-            Boolean flag = false;
-            while (true) {
-                if (temp.next == null) {
-                    break;
-                }
-                if (temp.next.no > heroNode.no) {
-                    break;
-                } else if (temp.next.no == heroNode.no) {
-                    flag = true;
-                    break;
-                }
-                temp = temp.next;
-            }
-            if (flag) {
-                System.out.printf("编号已经存在%d\n", heroNode.no);
-            } else {
-                heroNode.next = temp.next;
-                temp.next = heroNode;
-            }
-
-        }
-
-        public void list() {
-            HeroNode temp = head;
-            while (true) {
-                if (temp.next == null) {
-                    break;
-                }
-                temp = temp.next;
-                System.out.println(temp);
-            }
-        }
-
-
+    public HeroNode getHead() {
+        return head;
     }
 
 
-    static class HeroNode {
-        int no;
-        String name;
-        String nickName;
-        HeroNode next;
+    public void remove(int no) {
+        HeroNode temp = head;
+        Boolean flag = false;
+        while (true) {
+            if (temp.next == null) {
+                break;
+            } else if (temp.next.no == no) {
+                flag = true;
+                break;
+            }
+            temp = temp.next;
+        }
+        if (flag) {
+            temp.next = temp.next.next;
+        } else {
+            System.out.printf("没有找到%d\n", no);
+        }
+    }
 
-        public HeroNode(int no, String name, String nickName) {
-            this.no = no;
-            this.name = name;
-            this.nickName = nickName;
+    public void update(HeroNode newHerNode) {
+        HeroNode temp = head.next;
+        Boolean flag = false;
+        while (true) {
+            if (temp == null) {
+                break;
+            } else if (temp.no == newHerNode.no) {
+                flag = true;
+                break;
+            }
+            temp = temp.next;
+        }
+        if (flag) {
+            temp.name = newHerNode.name;
+            temp.nickName = newHerNode.nickName;
+        } else {
+            System.out.printf("没有找到编号为%d\n", newHerNode.no);
+        }
+    }
+
+    public void add(HeroNode herNode) {
+        HeroNode temp = head;
+        while (true) {
+            if (temp.next == null) {
+                break;
+            }
+            temp = temp.next;
+        }
+        temp.next = herNode;
+    }
+
+    public void addByOrder(HeroNode heroNode) {
+        HeroNode temp = head;
+        Boolean flag = false;
+        while (true) {
+            if (temp.next == null) {
+                break;
+            }
+            if (temp.next.no > heroNode.no) {
+                break;
+            } else if (temp.next.no == heroNode.no) {
+                flag = true;
+                break;
+            }
+            temp = temp.next;
+        }
+        if (flag) {
+            System.out.printf("编号已经存在%d\n", heroNode.no);
+        } else {
+            heroNode.next = temp.next;
+            temp.next = heroNode;
         }
 
-        @Override
-        public String toString() {
-            return "HeroNode{" +
-                    "no=" + no +
-                    ", name='" + name + '\'' +
-                    ", nickName='" + nickName + '\'' +
+    }
 
-                    '}';
+    public void list() {
+        HeroNode temp = head;
+        while (true) {
+            if (temp.next == null) {
+                break;
+            }
+            temp = temp.next;
+            System.out.println(temp);
         }
+    }
+
+
+}
+
+
+class HeroNode {
+    int no;
+    String name;
+    String nickName;
+    HeroNode next;
+
+    public HeroNode(int no, String name, String nickName) {
+        this.no = no;
+        this.name = name;
+        this.nickName = nickName;
+    }
+
+    @Override
+    public String toString() {
+        return "HeroNode{" +
+                "no=" + no +
+                ", name='" + name + '\'' +
+                ", nickName='" + nickName + '\'' +
+
+                '}';
     }
 }
+
 
 
 
